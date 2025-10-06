@@ -3,6 +3,6 @@ package HarrysSalon;
 public class HarrysSalon {
     //Hejehej
     //gleeemDet
-    //Hehehe
+    //Hehehes
     // ajdakldjaslk
 }
