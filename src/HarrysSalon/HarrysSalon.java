@@ -4,6 +4,6 @@ public class HarrysSalon {
     //Hej
     //
     //gleeemDet
-    //Hehehe
+    //Hehehes
     // ajdakldjaslk
 }
