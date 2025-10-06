@@ -1,7 +1,8 @@
 package HarrysSalon;
 
 public class HarrysSalon {
-    //Hejehej
+    //Hej
+    //
     //gleeemDet
     //Hehehes
     // ajdakldjaslk
