@@ -1,4 +1,4 @@
 package HarrysSalon;
 
-public class MensCut {
+public class MensCut extends Cuts{
 }
