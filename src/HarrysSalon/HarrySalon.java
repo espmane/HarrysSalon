@@ -1,4 +1,5 @@
 package HarrysSalon;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,35 +9,43 @@ public class HarrySalon {
 
     public void menu() {
         boolean exit = false;
-        System.out.println("""
-                    valid options:
-                    1. add a new appointment 'add'
-                    2. remove a appointment 'remove'
-                    3. edit appointment  'edit'
-                    4. addictional buys 'buy'
-                    5. show all appointments 'show'
-                    Go back "back"
+
+        while (!exit) {
+            System.out.println("""
+                    Menu options:
+                    
+                    1. Add a new appointment 'add'
+                    2. Remove a appointment 'remove'
+                    3. Edit appointment  'edit'
+                    4. Additional buys 'buy'
+                    5. Show all appointments 'show'
+                    0. Exit the program 'exit'
                     """);
-        while (exit) ;
-        {
-            int choice = scanner.nextInt();
+
+            String choice = scanner.nextLine().toLowerCase();
             switch (choice) {
-                case 1:
+                case "1":
+                case "add":
                     addTime();
                     break;
-                case 2:
+                case "2":
+                case "remove":
                     removeTime();
                     break;
-                case 3:
+                case "3":
+                case "edit":
                     editTime();
                     break;
-                case 4:
-                    buyAddictional();
+                case "4":
+                case "buy":
+                    buyAdditional();
                     break;
-                case 5:
+                case "5":
+                case "show":
                     showAppointments();
                     break;
-                case 0:
+                case "0":
+                case "exit":
                     exit = true;
                     break;
                 default:
@@ -46,25 +55,26 @@ public class HarrySalon {
     }
 
 
-    public void addTime(){
+    public void addTime() {
         Cuts cuts = new Cuts();
         appointments.add(cuts);
-        System.out.println("You've added: " + appointments + " ");
+        System.out.println("You've added: " + appointments);
     }
 
-    public void removeTime(){
-
-    }
-
-    public void editTime(){
+    public void removeTime() {
 
     }
 
-    public void buyAddictional(){
+    public void editTime() {
 
     }
 
-    public void showAppointments(){
+    public void buyAdditional() {
 
+    }
+
+    public void showAppointments() {
+        System.out.println(appointments.toString());
+        System.out.println();
     }
 }
