@@ -1,9 +1,8 @@
 package HarrysSalon;
 
 public class HarrysSalonTest {
-    //Hej
-    //
-    //gleeemDet
-    //Hehehes
-    // ajdakldjaslk
+    public static void main (String[] args){
+       HarrySalon harrysalon = new HarrySalon();
+        harrysalon.menu();
+    }
 }
