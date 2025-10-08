@@ -1,8 +1,9 @@
 package HarrysSalon;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class HarrySalon {
-    Arraylist<Cuts> Appointments = new Arraylist<>();
+    ArrayList<Cuts> appointments = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void menu() {
@@ -41,9 +42,10 @@ public class HarrySalon {
     }
 
     public void addTime(){
-        Cuts Appointment = new Cuts();
-        this.Appointments.add(Appointments);
-        System.out.println("You've added: " + Appointments + " ");
+
+        Cuts cuts = new Cuts();
+        this.appointments.add(cuts);
+        System.out.println("You've added: " + appointments + " ");
     }
 
     public void removeTime(){

@@ -1,7 +1,8 @@
 package HarrysSalon;
 
 public class HarrysSalonTest {
-    public void main (String[] args){
-
+    public static void main (String[] args){
+       HarrySalon harrysalon = new HarrySalon();
+        harrysalon.menu();
     }
 }
