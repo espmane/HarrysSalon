@@ -1,11 +1,13 @@
 package HarrysSalon;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cuts {
     private String typeOfCut;
     private int price;
-    private final String customerName;
+    private String customerName;
     private String date;
 
     Scanner scanner = new Scanner(System.in);
@@ -39,8 +41,20 @@ public class Cuts {
             }
         }
 
-        System.out.println("What is their name?: ");
-        customerName = scanner.nextLine();
+        while (true) {
+            System.out.println("What is their name?: ");
+            customerName = scanner.nextLine();
+
+            // checking for numbers in customerName using regex
+            Pattern pattern = Pattern.compile("\\d");
+            Matcher matcher = pattern.matcher(customerName);
+            boolean matchFound = matcher.find();
+            if (matchFound) {
+                System.out.println("Names cannot contain numbers. Please try again.");
+            } else  {
+                break;
+            }
+        }
     }
 
     private boolean validateDate(String date) {
