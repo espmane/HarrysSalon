@@ -48,7 +48,6 @@ public class HarrySalon {
 
     public void addTime(){
         Cuts cuts = new Cuts();
-
         appointments.add(cuts);
         System.out.println("You've added: " + appointments + " ");
     }
