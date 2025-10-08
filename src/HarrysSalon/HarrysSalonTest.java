@@ -1,9 +1,7 @@
 package HarrysSalon;
 
 public class HarrysSalonTest {
-    //Hej
-    //
-    //gleeemDet
-    //Hehehes
-    // ajdakldjaslk
+    public void main (String[] args){
+
+    }
 }
