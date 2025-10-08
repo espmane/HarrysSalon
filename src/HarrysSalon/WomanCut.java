@@ -1,4 +1,7 @@
 package HarrysSalon;
 
-public class WomanCut {
+public class WomanCut extends TypeOfCuts {
+    public WomanCut (int price,String type){
+        super(price, type);
+    }
 }
