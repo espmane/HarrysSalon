@@ -1,8 +1,9 @@
 package HarrysSalon;
 
-public class HarrysSalon {
+public class HarrysSalonTest {
     //Hej
     //
     //gleeemDet
+    //Hehehes
     // ajdakldjaslk
 }
