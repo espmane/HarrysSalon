@@ -6,29 +6,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OpenHours {
-    private String[] slots; // hver plads i arrayet er et tidsrum eller en booking
     private Scanner scanner = new Scanner(System.in);
-
-    public OpenHours() {
-        slots = new String[] {
-                "10:00-10:30",
-                "10:30-11:00",
-                "11:00-11:30",
-                "11:30-12:00",
-                "12:00-12:30",
-                "12:30-13:00",
-                "PAUSE",
-                "PAUSE",
-                "14:00-14:30",
-                "14:30-15:00",
-                "15:00-15:30",
-                "15:30-16:00",
-                "16:00-16:30",
-                "16:30-17:00",
-                "17:00-17:30",
-                "17:30-18:00"
-        };
-    }
+    private final String[] times = { "10:00-10:30","10:30-11:00","11:00-11:30","11:30-12:00",
+            "12:00-12:30","12:30-13:00",
+            "PAUSE 13:00-13:30","PAUSE 13:30-14:00",
+            "14:00-14:30","14:30-15:00","15:00-15:30","15:30-16:00",
+            "16:00-16:30","16:30-17:00","17:00-17:30","17:30-18:00"
+    };
+    private String[] slots = times.clone();
 
     // Vis alle tider
     public void showSlots() {
@@ -74,14 +59,15 @@ public class OpenHours {
             return;
         }
 
-        // Find tilbage til oprindeligt tidsinterval
-        int hour = 10 + (choice / 2);
-        int minute = (choice % 2) * 30;
-        String start = String.format("%02d:%02d", hour, minute);
-        String end = String.format("%02d:%02d", hour + (minute == 30 ? 1 : 0), (minute + 30) % 60);
+        // vi kan ikke “nulstille” til tiden automatisk, fordi vi skrev tiderne manuelt
+        // derfor kunne vi vælge at sætte den tilbage til "LEDIG"
+        if (slots[choice].startsWith("PAUSE")) {
+            System.out.println("Dette er en pause og kan ikke slettes.");
+            return;
+        }
 
-        slots[choice] = start + "-" + end;
-        System.out.println("Tiden er nu ledig igen.");
+        slots[choice] = times[choice];
+        System.out.println("Tiden er nu ledig igen.");;
     }
 
     public void menu() {
