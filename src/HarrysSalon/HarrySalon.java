@@ -8,9 +8,6 @@ public class HarrySalon {
     Scanner scanner = new Scanner(System.in);
 
     public void menu() {
-        boolean exit = false;
-
-        while (!exit) {
             System.out.println("""
                     Menu options:
                     
@@ -27,31 +24,34 @@ public class HarrySalon {
                 case "1":
                 case "add":
                     addTime();
+                    menu();
                     break;
                 case "2":
                 case "remove":
                     removeTime();
+                    menu();
                     break;
                 case "3":
                 case "edit":
                     editTime();
+                    menu();
                     break;
                 case "4":
                 case "buy":
                     buyAdditional();
+                    menu();
                     break;
                 case "5":
                 case "show":
                     showAppointments();
+                    menu();
                     break;
                 case "0":
                 case "exit":
-                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid input, try again.");
             }
-        }
     }
 
 
@@ -61,12 +61,28 @@ public class HarrySalon {
         System.out.println("You've added: " + appointments);
     }
 
-    public void removeTime() {
+    public void removeTime(){
+        System.out.println("Please enter the time appointment you want to remove.");
+        String input = scanner.nextLine();
 
+        boolean removed = appointments.removeIf(c ->
+                c.getName() != null && c.getName().equalsIgnoreCase(input));
+
+        if (removed)
+        {
+            System.out.println(input + " has been removed.");
+        }else{
+            System.out.println(input + " does not exist.");
+
+        }
     }
 
-    public void editTime() {
-
+    public void editTime(){
+        System.out.println("times currently scheduled:");
+        for (int i = 0; i < appointments.size(); i++) {
+            System.out.println((i+1) + ": " +  appointments.get(i));
+        }
+        System.out.println("-------------------------");
     }
 
     public void buyAdditional() {

@@ -12,6 +12,15 @@ public class Cuts {
 
     Scanner scanner = new Scanner(System.in);
 
+    Cuts(String typeOfCut, int price, String customerName, String date) {
+        this.typeOfCut = typeOfCut;
+        this.price = price;
+        this.customerName = customerName;
+        this.date = date;
+    }
+    public String getDate() {return date;}
+    public String getName() {return customerName;}
+
     public Cuts() {
 
         while (true) {
