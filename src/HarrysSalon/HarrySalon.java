@@ -8,6 +8,8 @@ public class HarrySalon {
     Scanner scanner = new Scanner(System.in);
 
     public void menu() {
+        boolean exit = false;
+        do {
             System.out.println("""
                     Menu options:
                     
@@ -24,34 +26,31 @@ public class HarrySalon {
                 case "1":
                 case "add":
                     addTime();
-                    menu();
                     break;
                 case "2":
                 case "remove":
                     removeTime();
-                    menu();
                     break;
                 case "3":
                 case "edit":
                     editTime();
-                    menu();
                     break;
                 case "4":
                 case "buy":
                     buyAdditional();
-                    menu();
                     break;
                 case "5":
                 case "show":
                     showAppointments();
-                    menu();
                     break;
                 case "0":
                 case "exit":
+                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid input, try again.");
             }
+        } while (exit == false);
     }
 
 

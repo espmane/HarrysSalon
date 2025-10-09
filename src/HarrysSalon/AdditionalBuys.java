@@ -1,6 +1,6 @@
 package HarrysSalon;
 
-public enum AddictionalBuys {
+public enum AdditionalBuys {
     HAIRBRUSH,
     WAX,
     SEAWATER,

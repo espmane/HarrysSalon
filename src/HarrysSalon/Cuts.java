@@ -41,16 +41,43 @@ public class Cuts {
         do {
             System.out.print("What is the name of the customer?: ");
             customerName = scanner.nextLine();
-        } while (validateName(customerName));
+        } while (hasNumber(customerName));
     }
 
-    public boolean validateName(String name) {
-        // checking for numbers in customerName using regex
-        Pattern pattern = Pattern.compile("\\d");
-        Matcher matcher = pattern.matcher(name);
+    public static boolean validateInput(String input) {
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9æøåÆØÅ]");
+        Matcher matcher = pattern.matcher(input);
+        if (input == null ||  input.isEmpty() || matcher.find()) {
+            System.out.println("Invalid character.");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean hasLetter(String letter){
+        if (validateInput(letter)) {
+            return true;
+        }
+        Pattern pattern = Pattern.compile("[A-Za-zæøåÆØÅ]");
+        Matcher matcher = pattern.matcher(letter);
         boolean matchFound = matcher.find();
         if (matchFound) {
-            System.out.println("Names cannot contain numbers. Please try again.\n");
+            System.out.println("Cannot contain letters. Please try again.\n");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasNumber(String number) {
+        if (validateInput(number)) {
+            return true;
+        }
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(number);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            System.out.println("Cannot contain numbers. Please try again.\n");
             return true;
         }
         return false;
@@ -90,7 +117,7 @@ public class Cuts {
         }
     }
 
-    private boolean validateCut(String cutType) {
+    public static boolean validateCut(String cutType) {
         return switch (cutType.toLowerCase()) {
             case "man", "woman", "beard", "hair coloring" -> false;
             default -> {
