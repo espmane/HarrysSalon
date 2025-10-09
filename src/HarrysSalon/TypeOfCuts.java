@@ -9,5 +9,14 @@ abstract class TypeOfCuts {
          this.type= type;
      }
 
+    public int getprice(){
+        return price;
+    }
+
+    public String gettype(){
+        return type;
+    }
+
+
 
 }
