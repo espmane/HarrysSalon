@@ -57,29 +57,40 @@ public class Cuts {
     }
 
     private boolean validateDate(String date) {
-        // split "date" into 3 based on "/"
-        String[] parts = date.split("/");
-        if (parts.length == 3) {
-            // change to int
+        // checking for letters in date using regex
+        Pattern pattern = Pattern.compile("[^0-9/]");
+        Matcher matcher = pattern.matcher(date);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            System.out.println("Date can only contain numbers and \"/\". Please try again.\n");
+            return false;
+        }
+        try {
+            // split "date" into 3 based on "/" and parse to int
+            String[] parts = date.split("/");
             int day = Integer.parseInt(parts[0]);
             int month = Integer.parseInt(parts[1]);
             int year = Integer.parseInt(parts[2]);
+
+            if (!(parts.length == 3)) {
+                System.out.println("Invalid date format. Please try again.\n");
+                return false;
+            }
 
             // check if they're valid dates
             if (month <= 12 && day <= 31 && month >= 1 && day >= 1 && year <= 99 && year >= 0) {
                 return true;
             } else {
-                System.out.println("Invalid date format. Please try again.\n");
+                System.out.println("Invalid date. Please try again.\n");
                 return false;
             }
-        } else {
-            System.out.println("Invalid date format. Please try again.\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please use the specified format.\n");
             return false;
         }
     }
 
     private boolean validateCut(String cutType) {
-
         return switch (cutType.toLowerCase()) {
             case "man", "woman", "beard", "hair coloring" -> false;
             default -> {
