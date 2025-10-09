@@ -10,9 +10,12 @@ public class Cuts {
 
     Scanner scanner = new Scanner(System.in);
 
+
     public Cuts() {
         System.out.println("Please input the date for the cut");
         this.date = scanner.nextLine();
+        System.out.println("Please enter a name for the customer");
+        this.customerName=scanner.nextLine();
         System.out.println("""
                 Please add type of cut:
                 Mens cut
@@ -21,6 +24,21 @@ public class Cuts {
                 Hair coloring
                 """);
         this.typeOfCut = validateCut();
+    }
+
+    public Cuts(String typeOfCut, int price, String customerName, String date) {
+        this.typeOfCut = typeOfCut;
+        this.price = price;
+        this.customerName = customerName;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getName(){
+        return customerName;
     }
 
     private boolean contains(String test) {
@@ -46,5 +64,10 @@ public class Cuts {
             }
         }
         return input;
+    }
+
+    @Override
+    public String toString(){
+        return customerName + " - " + date + " - "+ typeOfCut + " - "+ price;
     }
 }

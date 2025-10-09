@@ -8,6 +8,7 @@ public class HarrySalon {
 
     public void menu() {
         boolean exit = false;
+        while (exit) ;
         System.out.println("""
                     valid options:
                     1. add a new appointment 'add'
@@ -17,18 +18,21 @@ public class HarrySalon {
                     5. show all appointments 'show'
                     Go back "back"
                     """);
-        while (exit) ;
-        {
+
             int choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     addTime();
+                    menu();
                     break;
                 case 2:
                     removeTime();
+                    menu();
                     break;
                 case 3:
                     editTime();
+                    menu();
                     break;
                 case 4:
                     buyAddictional();
@@ -42,22 +46,37 @@ public class HarrySalon {
                 default:
                     System.out.println("Invalid input, try again.");
             }
-        }
     }
 
 
     public void addTime(){
         Cuts cuts = new Cuts();
         appointments.add(cuts);
-        System.out.println("You've added: " + appointments + " ");
+        System.out.println("You've added: " + appointments);
     }
 
     public void removeTime(){
+        System.out.println("Please enter the time appointment you want to remove.");
+        String input = scanner.nextLine();
 
+        boolean removed = appointments.removeIf(c ->
+                c.getName() != null && c.getName().equalsIgnoreCase(input));
+
+        if (removed)
+         {
+            System.out.println(input + " has been removed.");
+        }else{
+            System.out.println(input + " does not exist.");
+
+        }
     }
 
     public void editTime(){
-
+            System.out.println("times currently scheduled:");
+            for (int i = 0; i < appointments.size(); i++) {
+                System.out.println((i+1) + ": " +  appointments.get(i));
+            }
+            System.out.println("-------------------------");
     }
 
     public void buyAddictional(){
