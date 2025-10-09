@@ -22,45 +22,38 @@ public class Cuts {
     public String getName() {return customerName;}
 
     public Cuts() {
-
         do {
             System.out.print("Please input the date for the cut in the format dd/mm/yy: ");
             this.date = scanner.nextLine();
         } while (!validateDate(date));
 
-        while (true) {
-            System.out.println("""
-                    
+        do {
+            System.out.println("""            
                     Please add which type of cut:
                     Man
                     Woman
                     Beard
                     Hair coloring.
                     """);
-            String cutType = scanner.nextLine();
+            typeOfCut = scanner.nextLine();
+        } while (validateCut(typeOfCut));
 
-            // validating cut type
-            if (validateCut(cutType)) {
-                break;
-            } else {
-                System.out.println("You've input an invalid cut, try again. ");
-            }
-        }
-
-        while (true) {
-            System.out.println("What is their name?: ");
+        do {
+            System.out.print("What is the name of the customer?: ");
             customerName = scanner.nextLine();
+        } while (validateName(customerName));
+    }
 
-            // checking for numbers in customerName using regex
-            Pattern pattern = Pattern.compile("\\d");
-            Matcher matcher = pattern.matcher(customerName);
-            boolean matchFound = matcher.find();
-            if (matchFound) {
-                System.out.println("Names cannot contain numbers. Please try again.");
-            } else  {
-                break;
-            }
+    public boolean validateName(String name) {
+        // checking for numbers in customerName using regex
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(name);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            System.out.println("Names cannot contain numbers. Please try again.\n");
+            return true;
         }
+        return false;
     }
 
     private boolean validateDate(String date) {
@@ -86,9 +79,13 @@ public class Cuts {
     }
 
     private boolean validateCut(String cutType) {
+
         return switch (cutType.toLowerCase()) {
-            case "man", "woman", "beard", "hair coloring" -> true;
-            default -> false;
+            case "man", "woman", "beard", "hair coloring" -> false;
+            default -> {
+                System.out.println("You've input an invalid cut, try again. ");
+                yield true;
+            }
         };
     }
 
