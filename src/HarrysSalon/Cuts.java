@@ -23,13 +23,10 @@ public class Cuts {
 
     public Cuts() {
 
-        while (true) {
+        do {
             System.out.print("Please input the date for the cut in the format dd/mm/yy: ");
             this.date = scanner.nextLine();
-            if (validateDate(date)) {
-                break;
-            }
-        }
+        } while (!validateDate(date));
 
         while (true) {
             System.out.println("""
@@ -89,20 +86,14 @@ public class Cuts {
     }
 
     private boolean validateCut(String cutType) {
-        switch (cutType.toLowerCase()) {
-            case "man":
-            case "woman":
-            case "beard":
-            case "hair coloring":
-                return true;
-            default:
-                return false;
-        }
+        return switch (cutType.toLowerCase()) {
+            case "man", "woman", "beard", "hair coloring" -> true;
+            default -> false;
+        };
     }
 
     @Override
     public String toString() {
-        String output = date + " " + customerName + " is getting " + typeOfCut + " haircut for " + price + "Kr";
-        return output;
+        return date + " " + customerName + " is getting " + typeOfCut + " haircut for " + price + "Kr";
     }
 }
