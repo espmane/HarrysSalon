@@ -18,7 +18,6 @@ public class OpenHours {
         boolean exit = false;
         do {
             System.out.println("""
-                    
                     Menu options:
                     
                     1. Add a new appointment 'add'
@@ -100,15 +99,27 @@ public class OpenHours {
 
     // Edit a time slot
     public void editSlot() {
-        int choice = getValidChoice();
-        if (choice < 0) {
+        showSlots();
+        System.out.println("Choose a time you want to edit (1-16): ");
+        String choice = scanner.nextLine();
+
+        if (Cuts.hasLetter(choice)) {
+            System.out.println("Please only use numbers.");
             return;
         }
+        int slotsIndex = Integer.parseInt(choice) - 1;
+
+        if (slotsIndex < 0 || slotsIndex >= slots.length  || slots[slotsIndex].startsWith("PAUSE")) {
+            System.out.println("Invalid option, try again.");
+            return;
+        }
+
 
         System.out.println("What do you want to edit?");
         System.out.println("""
                 1. Name
                 2. Service
+                3. Time
                 """);
         String edit = scanner.nextLine();
 
@@ -129,14 +140,40 @@ public class OpenHours {
                             Hair coloring.\n""", name);
                     service = scanner.nextLine();
                 } while (Cuts.validateCut(service));
+                slots[slotsIndex] = name + " (" + service + ")";
+
                 break;
+            case "3":
+            case "time":
+                showSlots();
+                slots[slotsIndex] = times[slotsIndex];
+                System.out.println(slots[slotsIndex]);
+
+                System.out.print("Please enter the new time (1-16): ");
+                String newTime = scanner.nextLine();
+
+                if (Cuts.hasLetter(newTime)) {
+                    System.out.println("Please only use numbers.");
+                    return;
+                }
+                int intIndex = Integer.parseInt(newTime) - 1;
+
+                if (intIndex < 0 || intIndex >= slots.length  || slots[intIndex].startsWith("PAUSE")) {
+                    System.out.println("Invalid option, try again.");
+                    return;
+                }
+                if (!slots[intIndex].equals(times[intIndex])) {
+                    System.out.println("Time slot is already booked.");
+                    return;
+                }
+                slots[intIndex] = name + " (" + service + ")";
             default:
                 System.out.println("Invalid input, try again.");
                 break;
         }
 
-        slots[choice] = name + " (" + service + ")";
-        System.out.println(slots[choice]);
+       // slots[slotsIndex] = name + " (" + service + ")";
+        System.out.println(slots[slotsIndex]);
     }
 
     // Add additional things
