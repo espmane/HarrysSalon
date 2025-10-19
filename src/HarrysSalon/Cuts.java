@@ -29,7 +29,7 @@ public class Cuts {
     public Cuts(String typeOfCut, int price, String customerName, String date) {
         this.typeOfCut = typeOfCut;
         this.price = price;
-        this.customerName = customerName;
+        this.customerName = scanner.nextLine();
         this.date = date;
     }
 

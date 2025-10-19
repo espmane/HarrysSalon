@@ -30,7 +30,7 @@ public class OpenHours {
         int choice = Integer.parseInt(scanner.nextLine()) - 1;
 
         if (choice < 0 || choice >= slots.length) {
-            System.out.println("Ugyldigt valg.");
+            System.out.println("Invalid choise.");
             return;
         }
 
@@ -38,14 +38,13 @@ public class OpenHours {
             System.out.println("This time is already in use!");
             return;
         }
-
+Cuts cuts = new Cuts();
         System.out.print("Enter the name of the Customer: ");
-        String name = scanner.nextLine();
         System.out.print("What kind of cut today?: ");
         String service = scanner.nextLine();
 
-        slots[choice] = name + " (" + service + ")";
-        System.out.println("Booked time for " + name);
+        slots[choice] = cuts.getName() + " (" + service + ")";
+        System.out.println("Booked time for " + cuts.getName());
     }
 
     // Aflys en tid
