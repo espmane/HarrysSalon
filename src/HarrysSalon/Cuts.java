@@ -41,6 +41,10 @@ public class Cuts {
         return customerName;
     }
 
+    public void setName(String customerName){
+        this.customerName=customerName;
+    }
+
     private boolean contains(String test) {
         for (DCuts dcuts : DCuts.values()) {
             if (dcuts.name().equalsIgnoreCase(test)) {
