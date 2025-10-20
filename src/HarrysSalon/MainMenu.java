@@ -107,7 +107,7 @@ public class MainMenu {
         }
 
         slots[choice] = appointment.toString();
-        System.out.println("Booked time for " + slots[choice] + " at " + times[choice] + " - " + appointment.isPaid() + ".");
+        System.out.println("Booked time at " + times[choice] + " for " + slots[choice]);
         System.out.println();
 
     }
