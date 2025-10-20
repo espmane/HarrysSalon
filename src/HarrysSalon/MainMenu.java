@@ -52,8 +52,12 @@ public class MainMenu {
                     menu();
                     break;
                 case 4:
+                    editTime();
+                    menu();
                     break;
                 case 5:
+                    addAddictionalChoose();
+                    menu();
                     break;
                 case 0:
                     exit = true;
@@ -72,8 +76,8 @@ public class MainMenu {
 
         int choice;
         try {
-            choice=Integer.parseInt(scanner.nextLine()) - 1;
-        }catch (NumberFormatException e){
+            choice = Integer.parseInt(scanner.nextLine()) - 1;
+        } catch (NumberFormatException e) {
             System.out.println("Please enter a number");
             return;
         }
@@ -91,18 +95,20 @@ public class MainMenu {
         System.out.print("Enter the name of the Customer: ");
         String customerName = scanner.nextLine();
 
+
         TypeOfCutsSelect selector = new TypeOfCutsSelect();
         TypeOfCuts selectedCut = selector.chooseType();
 
-        Appointment appointment = new Appointment(customerName, selectedCut);
+        addAddictional();
 
+        Appointment appointment = new Appointment(customerName, selectedCut);
 
 
         System.out.print("Has the customer paid? (Yes/no) ");
         String input = scanner.nextLine();
         if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")) {
             appointment.setPaid(true);
-        }else if (input.equalsIgnoreCase("no")) {
+        } else if (input.equalsIgnoreCase("no")) {
             appointment.setPaid(false);
         }
 
@@ -143,8 +149,77 @@ public class MainMenu {
     }
 
     public void editTime() {
-        TypeOfCutsSelect typeOfCutsSelect = new TypeOfCutsSelect();
+        System.out.println("What is the name of the customer you would like to edit appointment for?:");
+        String name = scanner.nextLine();
+        int found = 0;
+
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i].toLowerCase().contains(name.toLowerCase()) && !slots[i].contains("-")) {
+                found = i;
+                System.out.println("Found booking at: " + times[i]);
+                System.out.println(slots[i]);
+                break;
+            }
+        }
+        if (found == 1) {
+            System.out.println("No appointment was found with that name");
+        }
+
         showSlots();
+        System.out.print("Choose a new time (1-" + slots.length + "): ");
+        int newTime;
+        try {
+            newTime = Integer.parseInt(scanner.nextLine()) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a number.");
+            return;
+        }
+
+        if (newTime < 0 || newTime >= slots.length || !slots[newTime].contains("-") || slots[newTime].startsWith("BREAK")) {
+            System.out.println("That time is not available.");
+            return;
+        }
+
+        // Flyt booking
+        String booking = slots[found];
+        slots[newTime] = booking;
+        slots[found] = times[found];
+        System.out.println("Appointment moved to: " + times[newTime]);
+    }
+
+    public void addAddictionalChoose() {
+        System.out.println("Do you wanna add ekstra? (Yes/no");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("yes")) {
+            addAddictional();
+        } else if (input.equalsIgnoreCase("no")) {
+            menu();
+        }
+    }
+
+    public String addAddictional() {
+        System.out.println("What would you like to add?");
+        for (AddictionalBuys a : AddictionalBuys.values()) {
+            System.out.println(a);
+        }
+
+        System.out.println("Enter you choice:");
+        String input = scanner.nextLine();
+        AddictionalBuys selected = null;
+        for (AddictionalBuys add : AddictionalBuys.values()) {
+            if (input.equalsIgnoreCase(add.getLabel())) {
+                selected = add;
+                break;
+            }
+        }
+
+        if (selected == null) {
+            System.out.println("Invalid choice");
+            return "";
+        } else {
+            System.out.println("You choose: " + selected.getLabel() + " " + selected.getPrice() + "kr.");
+            return " + " + selected.getLabel() + " (" + selected.getPrice() + "kr.)";
+        }
 
     }
 }
