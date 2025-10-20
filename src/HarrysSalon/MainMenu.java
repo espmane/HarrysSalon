@@ -12,8 +12,8 @@ public class MainMenu {
             "14:00-14:30", "14:30-15:00", "15:00-15:30", "15:30-16:00",
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
-    private final String[] slots = times.clone();
-    private final Scanner scanner = new Scanner(System.in);
+    private String[] slots = times.clone();
+    private Scanner scanner = new Scanner(System.in);
 
     public void menu() {
         boolean exit = false;
@@ -52,9 +52,11 @@ public class MainMenu {
                     menu();
                     break;
                 case 4:
+                    editTime();
+                    menu();
                     break;
                 case 5:
-                    addAdicional();
+                    addAddictionalChoose();
                     menu();
                     break;
                 case 0:
@@ -93,8 +95,11 @@ public class MainMenu {
         System.out.print("Enter the name of the Customer: ");
         String customerName = scanner.nextLine();
 
+
         TypeOfCutsSelect selector = new TypeOfCutsSelect();
         TypeOfCuts selectedCut = selector.chooseType();
+
+        addAddictional();
 
         Appointment appointment = new Appointment(customerName, selectedCut);
 
@@ -106,7 +111,6 @@ public class MainMenu {
         } else if (input.equalsIgnoreCase("no")) {
             appointment.setPaid(false);
         }
-
 
         slots[choice] = appointment.toString();
         System.out.println("Booked time at " + times[choice] + " for " + slots[choice]);
@@ -145,21 +149,43 @@ public class MainMenu {
     }
 
     public void editTime() {
-        TypeOfCutsSelect typeOfCutsSelect = new TypeOfCutsSelect();
-        showSlots();
-
+        cancelSlot();
+        bookSlot();
     }
 
-    public void addAdicional() {
-        System.out.println("Wanna add some ekstra product? (yes/no)");
+    public void addAddictionalChoose() {
+        System.out.println("Do you wanna add ekstra? (Yes/no");
         String input = scanner.nextLine();
         if (input.equalsIgnoreCase("yes")) {
-            for (AddictionalBuys label : AddictionalBuys.values()) {
-                System.out.println(label);
-            }
-            if (input.equalsIgnoreCase("no")) {
-                menu();
+            addAddictional();
+        } else if (input.equalsIgnoreCase("no")) {
+            menu();
+        }
+    }
+
+    public String addAddictional() {
+        System.out.println("What would you like to add?");
+        for (AddictionalBuys a : AddictionalBuys.values()) {
+            System.out.println(a);
+        }
+
+        System.out.println("Enter you choice:");
+        String input = scanner.nextLine();
+        AddictionalBuys selected = null;
+        for (AddictionalBuys add : AddictionalBuys.values()) {
+            if (input.equalsIgnoreCase(add.getLabel())) {
+                selected = add;
+                break;
             }
         }
+
+        if (selected == null) {
+            System.out.println("Invalid choice");
+            return "";
+        } else {
+            System.out.println("You choose: " + selected.getLabel() + " " + selected.getPrice() + "kr.");
+            return " + " + selected.getLabel() + " (" + selected.getPrice() + "kr.)";
+        }
+
     }
 }
