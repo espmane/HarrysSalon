@@ -1,9 +1,12 @@
+/*
 package HarrysSalon;
+import HarrysSalon.typeofcuts.TypeOfCutsSelect;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class HarrySalon {
-    ArrayList<Cuts> appointments = new ArrayList<>();
+    ArrayList<TypeOfCutsSelect> appointments = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void menu() {
@@ -50,8 +53,8 @@ public class HarrySalon {
 
 
     public void addTime(){
-        Cuts cuts = new Cuts();
-        appointments.add(cuts);
+        TypeOfCutsSelect typeOfCutsSelect = new TypeOfCutsSelect();
+        appointments.add(typeOfCutsSelect);
         System.out.println("You've added: " + appointments);
     }
 
@@ -60,7 +63,7 @@ public class HarrySalon {
         String input = scanner.nextLine();
 
         boolean removed = appointments.removeIf(c ->
-                c.getName() != null && c.getName().equalsIgnoreCase(input));
+                c.getCustomerName() != null && c.getName().equalsIgnoreCase(input));
 
         if (removed)
          {
@@ -87,3 +90,4 @@ public class HarrySalon {
 
     }
 }
+*/
