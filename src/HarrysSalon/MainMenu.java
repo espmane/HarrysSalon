@@ -12,8 +12,8 @@ public class MainMenu {
             "14:00-14:30", "14:30-15:00", "15:00-15:30", "15:30-16:00",
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
-    private String[] slots = times.clone();
-    private Scanner scanner = new Scanner(System.in);
+    private final String[] slots = times.clone();
+    private final Scanner scanner = new Scanner(System.in);
 
     public void menu() {
         boolean exit = false;
@@ -54,6 +54,8 @@ public class MainMenu {
                 case 4:
                     break;
                 case 5:
+                    addAdicional();
+                    menu();
                     break;
                 case 0:
                     exit = true;
@@ -72,8 +74,8 @@ public class MainMenu {
 
         int choice;
         try {
-            choice=Integer.parseInt(scanner.nextLine()) - 1;
-        }catch (NumberFormatException e){
+            choice = Integer.parseInt(scanner.nextLine()) - 1;
+        } catch (NumberFormatException e) {
             System.out.println("Please enter a number");
             return;
         }
@@ -97,14 +99,14 @@ public class MainMenu {
         Appointment appointment = new Appointment(customerName, selectedCut);
 
 
-
         System.out.print("Has the customer paid? (Yes/no) ");
         String input = scanner.nextLine();
         if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")) {
             appointment.setPaid(true);
-        }else if (input.equalsIgnoreCase("no")) {
+        } else if (input.equalsIgnoreCase("no")) {
             appointment.setPaid(false);
         }
+
 
         slots[choice] = appointment.toString();
         System.out.println("Booked time at " + times[choice] + " for " + slots[choice]);
@@ -146,5 +148,18 @@ public class MainMenu {
         TypeOfCutsSelect typeOfCutsSelect = new TypeOfCutsSelect();
         showSlots();
 
+    }
+
+    public void addAdicional() {
+        System.out.println("Wanna add some ekstra product? (yes/no)");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("yes")) {
+            for (AddictionalBuys label : AddictionalBuys.values()) {
+                System.out.println(label);
+            }
+            if (input.equalsIgnoreCase("no")) {
+                menu();
+            }
+        }
     }
 }
