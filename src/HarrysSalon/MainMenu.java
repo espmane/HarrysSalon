@@ -149,42 +149,8 @@ public class MainMenu {
     }
 
     public void editTime() {
-        System.out.println("What is the name of the customer you would like to edit appointment for?:");
-        String name = scanner.nextLine();
-        int found = 0;
-
-        for (int i = 0; i < slots.length; i++) {
-            if (slots[i].toLowerCase().contains(name.toLowerCase()) && !slots[i].contains("-")) {
-                found = i;
-                System.out.println("Found booking at: " + times[i]);
-                System.out.println(slots[i]);
-                break;
-            }
-        }
-        if (found == 1) {
-            System.out.println("No appointment was found with that name");
-        }
-
-        showSlots();
-        System.out.print("Choose a new time (1-" + slots.length + "): ");
-        int newTime;
-        try {
-            newTime = Integer.parseInt(scanner.nextLine()) - 1;
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a number.");
-            return;
-        }
-
-        if (newTime < 0 || newTime >= slots.length || !slots[newTime].contains("-") || slots[newTime].startsWith("BREAK")) {
-            System.out.println("That time is not available.");
-            return;
-        }
-
-        // Flyt booking
-        String booking = slots[found];
-        slots[newTime] = booking;
-        slots[found] = times[found];
-        System.out.println("Appointment moved to: " + times[newTime]);
+        cancelSlot();
+        bookSlot();
     }
 
     public void addAddictionalChoose() {
