@@ -1,53 +1,50 @@
+/*
 package HarrysSalon;
+import HarrysSalon.typeofcuts.TypeOfCutsSelect;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class HarrySalon {
-    ArrayList<Cuts> appointments = new ArrayList<>();
+    ArrayList<TypeOfCutsSelect> appointments = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void menu() {
-            System.out.println("""
-                    Menu options:
-                    
-                    1. Add a new appointment 'add'
-                    2. Remove a appointment 'remove'
-                    3. Edit appointment  'edit'
-                    4. Additional buys 'buy'
-                    5. Show all appointments 'show'
-                    0. Exit the program 'exit'
+        boolean exit = false;
+        while (exit) ;
+        System.out.println("""
+                    valid options:
+                    1. add a new appointment 'add'
+                    2. remove a appointment 'remove'
+                    3. edit appointment  'edit'
+                    4. addictional buys 'buy'
+                    5. show all appointments 'show'
+                    Go back "back"
                     """);
 
-            String choice = scanner.nextLine().toLowerCase();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
-                case "1":
-                case "add":
+                case 1:
                     addTime();
                     menu();
                     break;
-                case "2":
-                case "remove":
+                case 2:
                     removeTime();
                     menu();
                     break;
-                case "3":
-                case "edit":
+                case 3:
                     editTime();
                     menu();
                     break;
-                case "4":
-                case "buy":
-                    buyAdditional();
-                    menu();
+                case 4:
+                    buyAddictional();
                     break;
-                case "5":
-                case "show":
+                case 5:
                     showAppointments();
-                    menu();
                     break;
-                case "0":
-                case "exit":
+                case 0:
+                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid input, try again.");
@@ -55,9 +52,9 @@ public class HarrySalon {
     }
 
 
-    public void addTime() {
-        Cuts cuts = new Cuts();
-        appointments.add(cuts);
+    public void addTime(){
+        TypeOfCutsSelect typeOfCutsSelect = new TypeOfCutsSelect();
+        appointments.add(typeOfCutsSelect);
         System.out.println("You've added: " + appointments);
     }
 
@@ -66,10 +63,10 @@ public class HarrySalon {
         String input = scanner.nextLine();
 
         boolean removed = appointments.removeIf(c ->
-                c.getName() != null && c.getName().equalsIgnoreCase(input));
+                c.getCustomerName() != null && c.getName().equalsIgnoreCase(input));
 
         if (removed)
-        {
+         {
             System.out.println(input + " has been removed.");
         }else{
             System.out.println(input + " does not exist.");
@@ -78,19 +75,19 @@ public class HarrySalon {
     }
 
     public void editTime(){
-        System.out.println("times currently scheduled:");
-        for (int i = 0; i < appointments.size(); i++) {
-            System.out.println((i+1) + ": " +  appointments.get(i));
-        }
-        System.out.println("-------------------------");
+            System.out.println("times currently scheduled:");
+            for (int i = 0; i < appointments.size(); i++) {
+                System.out.println((i+1) + ": " +  appointments.get(i));
+            }
+            System.out.println("-------------------------");
     }
 
-    public void buyAdditional() {
+    public void buyAddictional(){
 
     }
 
-    public void showAppointments() {
-        System.out.println(appointments.toString());
-        System.out.println();
+    public void showAppointments(){
+
     }
 }
+*/
