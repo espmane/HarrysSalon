@@ -25,7 +25,7 @@ public class Admin {
     }
 
     public static void Economy(){
-        Appointment appointment = new Appointment();
+        MainMenu menu = new MainMenu();
         int sum = 0;
         int i;
 

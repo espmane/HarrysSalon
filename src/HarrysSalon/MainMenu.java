@@ -15,6 +15,10 @@ public class MainMenu {
     private String[] slots = times.clone();
     private Scanner scanner = new Scanner(System.in);
 
+    public String[] getSlots() {
+        return slots;
+    }
+
     public void menu() {
         boolean exit = false;
         while (!exit) {
