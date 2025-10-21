@@ -1,8 +1,6 @@
 package HarrysSalon;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Cuts {
     private String typeOfCut;
@@ -12,96 +10,64 @@ public class Cuts {
 
     Scanner scanner = new Scanner(System.in);
 
-    Cuts(String typeOfCut, int price, String customerName, String date) {
+
+    public Cuts() {
+        System.out.println("Please input the date for the cut");
+        this.date = scanner.nextLine();
+        System.out.println("Please enter a name for the customer");
+        this.customerName=scanner.nextLine();
+        System.out.println("""
+                Please add type of cut:
+                Mens cut
+                Woman cut
+                Beard trim
+                Hair coloring
+                """);
+        this.typeOfCut = validateCut();
+    }
+
+    public Cuts(String typeOfCut, int price, String customerName, String date) {
         this.typeOfCut = typeOfCut;
         this.price = price;
         this.customerName = customerName;
         this.date = date;
     }
-    public String getDate() {return date;}
-    public String getName() {return customerName;}
 
-    public Cuts() {
-        do {
-            System.out.print("Please input the date for the cut in the format dd/mm/yy: ");
-            this.date = scanner.nextLine();
-        } while (!validateDate(date));
-
-        do {
-            System.out.println("""            
-                    Please add which type of cut:
-                    Man
-                    Woman
-                    Beard
-                    Hair coloring.
-                    """);
-            typeOfCut = scanner.nextLine();
-        } while (validateCut(typeOfCut));
-
-        do {
-            System.out.print("What is the name of the customer?: ");
-            customerName = scanner.nextLine();
-        } while (validateName(customerName));
+    public String getDate() {
+        return date;
     }
 
-    public boolean validateName(String name) {
-        // checking for numbers in customerName using regex
-        Pattern pattern = Pattern.compile("\\d");
-        Matcher matcher = pattern.matcher(name);
-        boolean matchFound = matcher.find();
-        if (matchFound) {
-            System.out.println("Names cannot contain numbers. Please try again.\n");
-            return true;
+    public String getName(){
+        return customerName;
+    }
+
+    private boolean contains(String test) {
+        for (DCuts dcuts : DCuts.values()) {
+            if (dcuts.name().equalsIgnoreCase(test)) {
+                return true;
+            }
         }
         return false;
     }
 
-    private boolean validateDate(String date) {
-        // checking for letters in date using regex
-        Pattern pattern = Pattern.compile("[^0-9/]");
-        Matcher matcher = pattern.matcher(date);
-        boolean matchFound = matcher.find();
-        if (matchFound) {
-            System.out.println("Date can only contain numbers and \"/\". Please try again.\n");
-            return false;
-        }
-        try {
-            // split "date" into 3 based on "/" and parse to int
-            String[] parts = date.split("/");
-            int day = Integer.parseInt(parts[0]);
-            int month = Integer.parseInt(parts[1]);
-            int year = Integer.parseInt(parts[2]);
+    private String validateCut() {
+        String input = scanner.nextLine().toUpperCase();
+        boolean isDone = false;
 
-            if (!(parts.length == 3)) {
-                System.out.println("Invalid date format. Please try again.\n");
-                return false;
-            }
+        while (!isDone) {
+            if (contains(input)) {
+                isDone = true;
 
-            // check if they're valid dates
-            if (month <= 12 && day <= 31 && month >= 1 && day >= 1 && year <= 99 && year >= 0) {
-                return true;
             } else {
-                System.out.println("Invalid date. Please try again.\n");
-                return false;
+                System.out.println("You've input an invalid cut. ");
+                input = scanner.nextLine().toUpperCase();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please use the specified format.\n");
-            return false;
         }
-    }
-
-    private boolean validateCut(String cutType) {
-        return switch (cutType.toLowerCase()) {
-            case "man", "woman", "beard", "hair coloring" -> false;
-            default -> {
-                System.out.println("You've input an invalid cut, try again. ");
-                yield true;
-            }
-        };
+        return input;
     }
 
     @Override
-    public String toString() {
-        return date + " " + customerName + " is getting " + typeOfCut + " haircut for " + price + "Kr";
+    public String toString(){
+        return customerName + " - " + date + " - "+ typeOfCut + " - "+ price;
     }
 }
