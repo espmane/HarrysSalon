@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HarrySalon {
     ArrayList<Cuts> appointments = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
-
+//Reza
     public void menu() {
         boolean exit = false;
         while (exit) ;
