@@ -1,5 +1,7 @@
 package HarrysSalon.usercontrol;
 
+import HarrysSalon.Appointment;
+
 import java.util.Scanner;
 
 public class Admin {
@@ -16,6 +18,20 @@ public class Admin {
     }
 
     public static void adminmenu(){
-        System.out.println("U did it");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        if(input.equalsIgnoreCase("Yes")|| input.equalsIgnoreCase("1"));
+    }
+
+    public static void Economy(){
+        Appointment appointment = new Appointment();
+        int sum = 0;
+        int i;
+
+        for (i=0; i<slots.length; i++){
+            sum+= slots[i];
+        }
+        System.out.println("The total is:");
     }
 }
