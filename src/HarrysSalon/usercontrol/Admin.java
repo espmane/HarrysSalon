@@ -29,6 +29,7 @@ public class Admin {
         int sum = 0;
         int i;
 
+        //Getter for slots
         for (i=0; i<slots.length; i++){
             sum+= slots[i];
         }
