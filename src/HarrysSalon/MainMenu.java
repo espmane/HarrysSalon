@@ -2,6 +2,7 @@ package HarrysSalon;
 
 import HarrysSalon.typeofcuts.TypeOfCutsSelect;
 import HarrysSalon.typeofcuts.TypeOfCuts;
+import HarrysSalon.usercontrol.User;
 
 import java.util.Scanner;
 
@@ -13,6 +14,8 @@ public class MainMenu {
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
     private String[] slots = times.clone();
+    public TypeOfCuts[] toc = new TypeOfCuts[times.length];
+    public int[] priceThing = new int[16];
     private Scanner scanner = new Scanner(System.in);
 
     public void menu() {
@@ -25,10 +28,11 @@ public class MainMenu {
                     3. show all appointments  'show'
                     4. edit an appointment 'edit'
                     5. addictional buys 'buy'
-                    Go back "back"
+                    0. Go back "back"
                     """);
 
             String input = scanner.nextLine();
+            User u = new User();
             int choice = -1;
 
             try {
@@ -60,6 +64,7 @@ public class MainMenu {
                     menu();
                     break;
                 case 0:
+                    u.usermanager();
                     exit = true;
                     break;
                 default:
@@ -103,6 +108,7 @@ public class MainMenu {
        String addOns = addAddictional();
 
         Appointment appointment = new Appointment(customerName, selectedCut);
+        toc[choice] = selectedCut;
 
 
         System.out.print("Has the customer paid? (Yes/no) ");

@@ -1,8 +1,11 @@
 package HarrysSalon.usercontrol;
 
 import HarrysSalon.Appointment;
+import HarrysSalon.MainMenu;
+import HarrysSalon.typeofcuts.TypeOfCuts;
 
 import java.util.Scanner;
+
 
 public class Admin {
     public static void admin (){
@@ -22,16 +25,24 @@ public class Admin {
         String input = scanner.nextLine();
 
         if(input.equalsIgnoreCase("Yes")|| input.equalsIgnoreCase("1"));
+        Economy();
     }
 
     public static void Economy(){
-        Appointment appointment = new Appointment();
-        int sum = 0;
-        int i;
+      MainMenu menu = new MainMenu();
+        int total = 0;
 
-        for (i=0; i<slots.length; i++){
-            sum+= slots[i];
+        for (int i = 0; i < menu.priceThing.length; i++) {
+            total =+ menu.priceThing[i];
+            System.out.println(menu.priceThing[i]);
         }
-        System.out.println("The total is:");
+        System.out.println("" + total);
+
+        for (TypeOfCuts cut : menu.toc) {
+            if (cut != null) {
+                total += cut.getPrice();
+            }
+        }
+        System.out.println("The total is:" + total);
     }
 }
