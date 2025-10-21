@@ -24,7 +24,7 @@ public class Admin {
 
         if (input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("1")) ;
     }
-
+//HASHSAH
     public static void Economy() {
         MainMenu menu = new MainMenu();
 
