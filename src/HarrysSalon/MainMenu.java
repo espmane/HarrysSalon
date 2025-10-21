@@ -18,6 +18,10 @@ public class MainMenu {
     public int[] priceThing = new int[16];
     private Scanner scanner = new Scanner(System.in);
 
+    public String[] getSlots() {
+        return slots;
+    }
+
     public void menu() {
         boolean exit = false;
         while (!exit) {
