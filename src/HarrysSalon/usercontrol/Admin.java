@@ -1,37 +1,40 @@
 package HarrysSalon.usercontrol;
 
 import HarrysSalon.Appointment;
+import HarrysSalon.MainMenu;
 
 import java.util.Scanner;
 
 public class Admin {
-    public static void admin (){
+    public static void admin() {
         System.out.println("Admin login:");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.equals("123")) {
             adminmenu();
-        }else {
+        } else {
             System.out.println("Wrong password");
             admin();
         }
     }
-
-    public static void adminmenu(){
+//
+    public static void adminmenu() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        if(input.equalsIgnoreCase("Yes")|| input.equalsIgnoreCase("1"));
+        if (input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("1")) ;
     }
+//HASH
+    public static void Economy() {
+        MainMenu menu = new MainMenu();
 
-    public static void Economy(){
-        Appointment appointment = new Appointment();
+        String[] slots = menu.getSlots();
         int sum = 0;
         int i;
 
-        for (i=0; i<slots.length; i++){
-            sum+= slots[i];
+        for (i = 0; i < slots.length; i++) {
+            sum += slots[i];
         }
-        System.out.println("The total is:");
+        System.out.println("The total is:" + sum);
     }
 }
