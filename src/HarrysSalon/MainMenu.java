@@ -99,7 +99,8 @@ public class MainMenu {
         TypeOfCutsSelect selector = new TypeOfCutsSelect();
         TypeOfCuts selectedCut = selector.chooseType();
 
-        addAddictional();
+
+       String addOns = addAddictional();
 
         Appointment appointment = new Appointment(customerName, selectedCut);
 
@@ -112,8 +113,8 @@ public class MainMenu {
             appointment.setPaid(false);
         }
 
-        slots[choice] = appointment.toString();
-        System.out.println("Booked time at " + times[choice] + " for " + slots[choice]);
+        slots[choice] = appointment.toString() ;
+        System.out.println("Booked time at " + times[choice] + " for " + slots[choice] + addOns);
         System.out.println();
 
     }

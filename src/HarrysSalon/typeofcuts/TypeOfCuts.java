@@ -19,6 +19,6 @@ public abstract class TypeOfCuts {
 
     @Override
     public String toString(){
-        return type + " - " + price;
+        return type + " + " + price;
     }
 }

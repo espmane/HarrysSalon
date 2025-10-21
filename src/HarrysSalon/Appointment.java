@@ -32,6 +32,6 @@ public class Appointment {
     @Override
     public String toString() {
         String paidStatus = paid ? "Paid" : "Not paid";
-        return customerName + " (" + cut.getType() + " — " + cut.getPrice() + " kr)" + " - " + paidStatus;
+        return customerName + " (" + cut.getType() + " + " + cut.getPrice() + " kr)" + " + " + paidStatus;
     }
 }
