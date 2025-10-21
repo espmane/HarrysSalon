@@ -92,7 +92,7 @@ public class MainMenu {
         }
 
         if (choice < 0 || choice >= slots.length) {
-            System.out.println("Invalid choise.");
+            System.out.println("Invalid choice.");
             return;
         }
 
@@ -107,6 +107,9 @@ public class MainMenu {
 
         TypeOfCutsSelect selector = new TypeOfCutsSelect();
         TypeOfCuts selectedCut = selector.chooseType();
+
+        String numbers = selectedCut.toString().replaceAll("[^0-9]", "");
+        priceThing[choice] = Integer.parseInt(numbers);
 
 
        String addOns = addAddictional();
