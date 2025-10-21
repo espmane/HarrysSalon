@@ -1,6 +1,6 @@
 package HarrysSalon;
 
-public enum AddictionalBuys {
+public enum AdditionalBuys {
     HAIR_WAX("Hair wax", 200),
     BRUSH("Brush", 300),
     SHAMPOO("Shampoo", 150);
@@ -9,7 +9,7 @@ public enum AddictionalBuys {
     private final int price;
 
     // Constructor til at sætte label + pris
-    AddictionalBuys(String label, int price) {
+    AdditionalBuys(String label, int price) {
         this.label = label;
         this.price = price;
     }

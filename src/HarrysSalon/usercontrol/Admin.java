@@ -1,6 +1,5 @@
 package HarrysSalon.usercontrol;
 
-import HarrysSalon.Appointment;
 import HarrysSalon.MainMenu;
 import HarrysSalon.typeofcuts.TypeOfCuts;
 
@@ -8,40 +7,47 @@ import java.util.Scanner;
 
 
 public class Admin {
-    public static void admin (){
-        System.out.println("Admin login:");
+    public static void admin() {
+        System.out.print("Admin login: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         if (input.equals("123")) {
-            adminmenu();
-        }else {
+            adminMenu();
+        } else {
             System.out.println("Wrong password");
             admin();
         }
     }
 
-    public static void adminmenu(){
+    public static void adminMenu() {
+        System.out.println("""
+                Welcome Admin!
+                
+                Valid options are:
+                1. Economy
+                0. Explode
+                """);
+
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-
-        if(input.equalsIgnoreCase("Yes")|| input.equalsIgnoreCase("1"));
-        Economy();
+        switch (input.toLowerCase()) {
+            case "1":
+            case "economy":
+                economy();
+            case "0":
+            case "explode":
+                return;
+            default:
+                System.out.println("Invalid input, try again.");
+                adminMenu();
+        }
     }
 
-    public static void Economy(){
-      MainMenu menu = new MainMenu();
+    public static void economy() {
         int total = 0;
 
-        for (int i = 0; i < menu.priceThing.length; i++) {
-            total =+ menu.priceThing[i];
-            System.out.println(menu.priceThing[i]);
-        }
-        System.out.println("" + total);
-
-        for (TypeOfCuts cut : menu.toc) {
-            if (cut != null) {
-                total += cut.getPrice();
-            }
+        for (int i = 0; i < MainMenu.priceThing.length; i++) {
+            total += MainMenu.priceThing[i];
         }
         System.out.println("The total is:" + total);
     }

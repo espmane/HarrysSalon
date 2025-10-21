@@ -14,7 +14,7 @@ public class Appointment {
         this.paid = false;
     }
 
-    public boolean isPaid(){
+    public boolean isPaid() {
         return paid;
     }
 

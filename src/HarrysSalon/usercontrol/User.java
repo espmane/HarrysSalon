@@ -5,8 +5,8 @@ import HarrysSalon.MainMenu;
 import java.util.Scanner;
 
 public class User {
-    public static void usermanager() {
-        System.out.println("Welcome to Harry Salon usermanagement:");
+    public static void userManager() {
+        System.out.println("Welcome to Harry Salon user management:");
         System.out.println("1. Admin (Type 1 or Admin)");
         System.out.println("2. User (Type 2 or User)");
         Scanner scanner = new Scanner(System.in);

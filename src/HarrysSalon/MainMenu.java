@@ -14,8 +14,7 @@ public class MainMenu {
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
     private String[] slots = times.clone();
-    public TypeOfCuts[] toc = new TypeOfCuts[times.length];
-    public int[] priceThing = new int[16];
+    public static int[] priceThing = new int[16];
     private Scanner scanner = new Scanner(System.in);
 
     public String[] getSlots() {
@@ -26,49 +25,47 @@ public class MainMenu {
         boolean exit = false;
         while (!exit) {
             System.out.println("""
-                    valid options:
-                    1. add a new appointment 'add'
-                    2. remove an appointment 'remove'
-                    3. show all appointments  'show'
-                    4. edit an appointment 'edit'
-                    5. addictional buys 'buy'
-                    0. Go back "back"
+                    Valid options:
+                    1. Add a new appointment 'add'
+                    2. Remove an appointment 'remove'
+                    3. Show all appointments  'show'
+                    4. Edit an appointment 'edit'
+                    5. Additional purchases 'buy'
+                    0. Go back 'back'
                     """);
 
             String input = scanner.nextLine();
             User u = new User();
-            int choice = -1;
 
-            try {
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid choice");
-                continue;
-            }
-
-            switch (choice) {
-                case 1:
+            switch (input.toLowerCase()) {
+                case "1":
+                case "add":
                     bookSlot();
                     menu();
                     break;
-                case 2:
+                case "2":
+                case "remove":
                     cancelSlot();
                     menu();
                     break;
-                case 3:
+                case "3":
+                case "show":
                     showSlots();
                     menu();
                     break;
-                case 4:
+                case "4":
+                case "edit":
                     editTime();
                     menu();
                     break;
-                case 5:
-                    addAddictionalChoose();
+                case "5":
+                case "buy":
+                    addAdditionalChoose();
                     menu();
                     break;
-                case 0:
-                    u.usermanager();
+                case "0":
+                case "back":
+                    u.userManager();
                     exit = true;
                     break;
                 default:
@@ -92,7 +89,7 @@ public class MainMenu {
         }
 
         if (choice < 0 || choice >= slots.length) {
-            System.out.println("Invalid choise.");
+            System.out.println("Invalid choice.");
             return;
         }
 
@@ -101,29 +98,30 @@ public class MainMenu {
             return;
         }
 
-        System.out.print("Enter the name of the Customer: ");
+        System.out.print("Enter the name of the customer: ");
         String customerName = scanner.nextLine();
 
 
         TypeOfCutsSelect selector = new TypeOfCutsSelect();
         TypeOfCuts selectedCut = selector.chooseType();
-
-
-       String addOns = addAddictional();
+        String addOns = addAdditional();
 
         Appointment appointment = new Appointment(customerName, selectedCut);
-        toc[choice] = selectedCut;
 
 
         System.out.print("Has the customer paid? (Yes/no) ");
         String input = scanner.nextLine();
         if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")) {
             appointment.setPaid(true);
-        } else if (input.equalsIgnoreCase("no")) {
+        } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")) {
             appointment.setPaid(false);
         }
 
-        slots[choice] = appointment.toString() ;
+        // Fjerner alt andet end tal, og sætter ind i "priceThing" på choice's plads
+        String numbers = selectedCut.toString().replaceAll("[^0-9]", "");
+        priceThing[choice] = Integer.parseInt(numbers);
+
+        slots[choice] = appointment.toString();
         System.out.println("Booked time at " + times[choice] + " for " + slots[choice] + addOns);
         System.out.println();
 
@@ -164,26 +162,26 @@ public class MainMenu {
         bookSlot();
     }
 
-    public void addAddictionalChoose() {
-        System.out.println("Do you wanna add ekstra? (Yes/no");
+    public void addAdditionalChoose() {
+        System.out.println("Do you wanna add extra? (Yes/no");
         String input = scanner.nextLine();
-        if (input.equalsIgnoreCase("yes")) {
-            addAddictional();
-        } else if (input.equalsIgnoreCase("no")) {
+        if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")) {
+            addAdditional();
+        } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")) {
             menu();
         }
     }
 
-    public String addAddictional() {
+    public String addAdditional() {
         System.out.println("What would you like to add?");
-        for (AddictionalBuys a : AddictionalBuys.values()) {
+        for (AdditionalBuys a : AdditionalBuys.values()) {
             System.out.println(a);
         }
 
         System.out.println("Enter you choice:");
         String input = scanner.nextLine();
-        AddictionalBuys selected = null;
-        for (AddictionalBuys add : AddictionalBuys.values()) {
+        AdditionalBuys selected = null;
+        for (AdditionalBuys add : AdditionalBuys.values()) {
             if (input.equalsIgnoreCase(add.getLabel())) {
                 selected = add;
                 break;
