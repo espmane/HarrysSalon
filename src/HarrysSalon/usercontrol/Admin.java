@@ -17,7 +17,7 @@ public class Admin {
             admin();
         }
     }
-//IISISIS
+//
     public static void adminmenu() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
