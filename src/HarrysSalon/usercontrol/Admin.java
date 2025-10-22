@@ -50,5 +50,6 @@ public class Admin {
             total += MainMenu.priceThing[i];
         }
         System.out.println("The total is:" + total);
+        admin();
     }
 }

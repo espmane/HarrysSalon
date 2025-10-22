@@ -4,7 +4,14 @@ import HarrysSalon.typeofcuts.TypeOfCutsSelect;
 import HarrysSalon.typeofcuts.TypeOfCuts;
 import HarrysSalon.usercontrol.User;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.Date;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.*;
 
 public class MainMenu {
     private final String[] times = {"10:00-10:30", "10:30-11:00", "11:00-11:30", "11:30-12:00",
@@ -14,12 +21,12 @@ public class MainMenu {
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
     private String[] slots = times.clone();
-    public static int[] priceThing = new int[16];
-    private Scanner scanner = new Scanner(System.in);
-
     public String[] getSlots() {
         return slots;
     }
+    public static int[] priceThing = new int[16];
+    private Scanner scanner = new Scanner(System.in);
+
 
     public void menu() {
         boolean exit = false;
@@ -31,6 +38,7 @@ public class MainMenu {
                     3. Show all appointments  'show'
                     4. Edit an appointment 'edit'
                     5. Additional purchases 'buy'
+                    6. Print time slots to file 'print'
                     0. Go back 'back'
                     """);
 
@@ -62,6 +70,10 @@ public class MainMenu {
                 case "buy":
                     addAdditionalChoose();
                     menu();
+                    break;
+                case "6":
+                case "print":
+                    printTimeSlots();
                     break;
                 case "0":
                 case "back":
@@ -107,7 +119,6 @@ public class MainMenu {
         String addOns = addAdditional();
 
         Appointment appointment = new Appointment(customerName, selectedCut);
-
 
         System.out.print("Has the customer paid? (Yes/no) ");
         String input = scanner.nextLine();
@@ -170,6 +181,69 @@ public class MainMenu {
         } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")) {
             menu();
         }
+    }
+
+    public void printTimeSlots(){
+        System.out.println("Which days timeslots do you wish to print to file? ");
+        System.out.println(); // I dag
+        System.out.println(); // I morgen
+        System.out.println(); // I overmorgen
+        System.out.println(); // Dagen efter i overmorgen
+
+        String input = scanner.nextLine();
+
+        switch (input) {
+            case "1":
+                createFile(getDate());
+                writeFile(getDate());
+            case "2":
+
+            case "3":
+
+            case "4":
+
+            default:
+                System.out.println("Invalid input, please try again.");
+        }
+    }
+
+
+    public void createFile(String filename) {
+        try {
+            File myObj = new File(filename);
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void writeFile(String dato){
+        try {
+            FileWriter myWriter = new FileWriter(dato);
+            myWriter.write("");
+            for (String timeSlot : slots) {
+                // alle felter på samme linje, separeret med komma
+               myWriter.write(String.join(",", timeSlot) + "\n");
+           }
+           myWriter.close();
+           System.out.println("Successfully wrote to the file.");
+       } catch (IOException e) {
+           System.out.println("An error occurred.");
+           e.printStackTrace();
+       }
+    }
+
+    public String getDate(){
+        SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
+        String str = ft.format(new Date());
+        // Printing the formatted date
+        System.out.println("Formatted Date : " + str);
+        return str;
     }
 
     public String addAdditional() {

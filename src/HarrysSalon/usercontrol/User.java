@@ -5,7 +5,8 @@ import HarrysSalon.MainMenu;
 import java.util.Scanner;
 
 public class User {
-    public static void userManager() {
+    public void userManager() {
+        chooseDate();
         System.out.println("Welcome to Harry Salon user management:");
         System.out.println("1. Admin (Type 1 or Admin)");
         System.out.println("2. User (Type 2 or User)");
@@ -22,5 +23,18 @@ public class User {
         }
 
 
+    }
+public String getCurrentDate(){return currentDate;}
+    private String currentDate; //
+    private void chooseDate(){
+        System.out.print("Enter date (DD-MM-YYYY): ");
+        Scanner scanner = new Scanner(System.in);
+        String d = scanner.nextLine().trim();
+        if (d.isEmpty()){
+            System.out.println("Not date entered. Keeping previous date " + (currentDate == null ? "(none)" : currentDate));
+            return;
+        }
+        currentDate = d;
+        System.out.println("Date set to: " + currentDate);
     }
 }
