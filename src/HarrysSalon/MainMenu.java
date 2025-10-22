@@ -5,9 +5,7 @@ import HarrysSalon.typeofcuts.TypeOfCuts;
 import HarrysSalon.usercontrol.User;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
-import java.util.Date;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -18,13 +16,12 @@ public class MainMenu {
             "14:00-14:30", "14:30-15:00", "15:00-15:30", "15:30-16:00",
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
-    private String[] slots = times.clone();
+    private final String[] slots = times.clone();
     public String[] getSlots() {
         return slots;
     }
     public static int[] priceThing = new int[16];
-    private Scanner scanner = new Scanner(System.in);
-
+    private final Scanner scanner = new Scanner(System.in);
 
     public void menu() {
         boolean exit = false;
@@ -62,7 +59,7 @@ public class MainMenu {
                     break;
                 case "5":
                 case "buy":
-                    addAdditionalChoose();
+                    addAdditionalChoice();
                     break;
                 case "6":
                 case "print":
@@ -166,7 +163,7 @@ public class MainMenu {
         bookSlot();
     }
 
-    public void addAdditionalChoose() {
+    public void addAdditionalChoice() {
         System.out.println("Do you wanna add extra? (Yes/no");
         String input = scanner.nextLine();
         if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")) {
@@ -178,9 +175,10 @@ public class MainMenu {
 
     public void printTimeSlots(){
         String date = User.getChosenDate();
+
         System.out.println("Writing file for: " + date);
-        createFile(date);
-        writeFile(date);
+        createFile(date + ".txt");
+        writeFile(date + ".txt");
     }
 
     public void createFile(String filename) {
@@ -211,14 +209,6 @@ public class MainMenu {
            System.out.println("An error occurred.");
            e.printStackTrace();
        }
-    }
-
-    public String getDate(){
-        SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
-        String str = ft.format(new Date());
-        // Formateret dato
-        System.out.println("Formatted Date : " + str);
-        return str;
     }
 
     public String addAdditional() {

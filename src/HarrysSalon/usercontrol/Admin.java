@@ -11,7 +11,7 @@ public class Admin {
         System.out.print("Admin login: ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        if (input.equals("123")) {
+        if (input.equals("hairyharry")) {
             adminMenu();
         } else {
             System.out.println("Wrong password");
@@ -50,6 +50,6 @@ public class Admin {
             total += MainMenu.priceThing[i];
         }
         System.out.println("The total is:" + total);
-        admin();
+        adminMenu();
     }
 }

@@ -15,7 +15,7 @@ public class User {
 
         if (input.equalsIgnoreCase("Admin") || input.equalsIgnoreCase("1")) {
             Admin a = new Admin();
-            a.admin();
+            Admin.admin();
         } else if (input.equalsIgnoreCase("User") || input.equalsIgnoreCase("2")) {
             MainMenu mainMenu = new MainMenu();
             mainMenu.menu();
