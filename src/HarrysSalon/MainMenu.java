@@ -5,13 +5,11 @@ import HarrysSalon.typeofcuts.TypeOfCuts;
 import HarrysSalon.usercontrol.User;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.*;
 
 public class MainMenu {
     private final String[] times = {"10:00-10:30", "10:30-11:00", "11:00-11:30", "11:30-12:00",
@@ -49,27 +47,22 @@ public class MainMenu {
                 case "1":
                 case "add":
                     bookSlot();
-                    menu();
                     break;
                 case "2":
                 case "remove":
                     cancelSlot();
-                    menu();
                     break;
                 case "3":
                 case "show":
                     showSlots();
-                    menu();
                     break;
                 case "4":
                 case "edit":
                     editTime();
-                    menu();
                     break;
                 case "5":
                 case "buy":
                     addAdditionalChoose();
-                    menu();
                     break;
                 case "6":
                 case "print":
@@ -184,29 +177,11 @@ public class MainMenu {
     }
 
     public void printTimeSlots(){
-        System.out.println("Which days timeslots do you wish to print to file? ");
-        System.out.println(); // I dag
-        System.out.println(); // I morgen
-        System.out.println(); // I overmorgen
-        System.out.println(); // Dagen efter i overmorgen
-
-        String input = scanner.nextLine();
-
-        switch (input) {
-            case "1":
-                createFile(getDate());
-                writeFile(getDate());
-            case "2":
-
-            case "3":
-
-            case "4":
-
-            default:
-                System.out.println("Invalid input, please try again.");
-        }
+        String date = User.getChosenDate();
+        System.out.println("Writing file for: " + date);
+        createFile(date);
+        writeFile(date);
     }
-
 
     public void createFile(String filename) {
         try {
@@ -241,7 +216,7 @@ public class MainMenu {
     public String getDate(){
         SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
         String str = ft.format(new Date());
-        // Printing the formatted date
+        // Formateret dato
         System.out.println("Formatted Date : " + str);
         return str;
     }

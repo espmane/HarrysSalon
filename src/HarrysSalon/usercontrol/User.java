@@ -13,7 +13,6 @@ public class User {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-
         if (input.equalsIgnoreCase("Admin") || input.equalsIgnoreCase("1")) {
             Admin a = new Admin();
             a.admin();
@@ -21,20 +20,19 @@ public class User {
             MainMenu mainMenu = new MainMenu();
             mainMenu.menu();
         }
-
-
     }
-public String getCurrentDate(){return currentDate;}
-    private String currentDate; //
+
+public static String getChosenDate(){return chosenDate;}
+    public static String chosenDate; //
     private void chooseDate(){
         System.out.print("Enter date (DD-MM-YYYY): ");
         Scanner scanner = new Scanner(System.in);
         String d = scanner.nextLine().trim();
         if (d.isEmpty()){
-            System.out.println("Not date entered. Keeping previous date " + (currentDate == null ? "(none)" : currentDate));
+            System.out.println("Not date entered. Keeping previous date " + (chosenDate == null ? "(none)" : chosenDate));
             return;
         }
-        currentDate = d;
-        System.out.println("Date set to: " + currentDate);
+        chosenDate = d;
+        System.out.println("Date set to: " + chosenDate);
     }
 }
