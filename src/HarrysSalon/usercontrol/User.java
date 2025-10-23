@@ -14,7 +14,6 @@ public class User {
         String input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("Admin") || input.equalsIgnoreCase("1")) {
-            Admin a = new Admin();
             Admin.admin();
         } else if (input.equalsIgnoreCase("User") || input.equalsIgnoreCase("2")) {
             MainMenu mainMenu = new MainMenu();

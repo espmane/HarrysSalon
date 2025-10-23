@@ -16,23 +16,16 @@ public class TypeOfCutsSelect {
                     """);
             System.out.println("Choose between 1-4");
 
-            String input = scanner.nextLine();
-            int choice;
-            try {
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid choice");
-                continue;
-            }
+            String choice = scanner.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     return new MensCut();
-                case 2:
+                case "2":
                     return new WomanCut();
-                case 3:
+                case "3":
                     return new BeardTrim();
-                case 4:
+                case "4":
                     return new HairColoring();
                 default:
                     System.out.println("Invalid choice, please try again");

@@ -17,10 +17,7 @@ public class MainMenu {
             "16:00-16:30", "16:30-17:00", "17:00-17:30", "17:30-18:00"
     };
     private final String[] slots = times.clone();
-    public String[] getSlots() {
-        return slots;
-    }
-    public static int[] priceThing = new int[16];
+    public static int[] arrayWithPrice = new int[16];
     private final Scanner scanner = new Scanner(System.in);
 
     public void menu() {
@@ -120,7 +117,7 @@ public class MainMenu {
 
         // Fjerner alt andet end tal, og sætter ind i "priceThing" på choice's plads
         String numbers = selectedCut.toString().replaceAll("[^0-9]", "");
-        priceThing[choice] = Integer.parseInt(numbers);
+        arrayWithPrice[choice] = Integer.parseInt(numbers);
 
         slots[choice] = appointment.toString();
         System.out.println("Booked time at " + times[choice] + " for " + slots[choice] + addOns);
@@ -173,7 +170,7 @@ public class MainMenu {
         }
     }
 
-    public void printTimeSlots(){
+    public void printTimeSlots() {
         String date = User.getChosenDate();
 
         System.out.println("Writing file for: " + date);
@@ -190,25 +187,23 @@ public class MainMenu {
                 System.out.println("File already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("An error occurred." + e.getMessage());
         }
     }
 
-    public void writeFile(String dato){
+    public void writeFile(String dato) {
         try {
             FileWriter myWriter = new FileWriter(dato);
             myWriter.write("");
             for (String timeSlot : slots) {
                 // alle felter på samme linje, separeret med komma
-               myWriter.write(String.join(",", timeSlot) + "\n");
-           }
-           myWriter.close();
-           System.out.println("Successfully wrote to the file.");
-       } catch (IOException e) {
-           System.out.println("An error occurred.");
-           e.printStackTrace();
-       }
+                myWriter.write(String.join(",", timeSlot) + "\n");
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred." + e.getMessage());
+        }
     }
 
     public String addAdditional() {

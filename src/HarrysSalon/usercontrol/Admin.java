@@ -1,7 +1,6 @@
 package HarrysSalon.usercontrol;
 
 import HarrysSalon.MainMenu;
-import HarrysSalon.typeofcuts.TypeOfCuts;
 
 import java.util.Scanner;
 
@@ -25,7 +24,7 @@ public class Admin {
                 
                 Valid options are:
                 1. Economy
-                0. Explode
+                0. Exit
                 """);
 
         Scanner scanner = new Scanner(System.in);
@@ -33,9 +32,9 @@ public class Admin {
         switch (input.toLowerCase()) {
             case "1":
             case "economy":
-                economy();
+                printIncome();
             case "0":
-            case "explode":
+            case "exit":
                 return;
             default:
                 System.out.println("Invalid input, try again.");
@@ -43,13 +42,13 @@ public class Admin {
         }
     }
 
-    public static void economy() {
+    public static void printIncome() {
         int total = 0;
 
-        for (int i = 0; i < MainMenu.priceThing.length; i++) {
-            total += MainMenu.priceThing[i];
+        for (int i = 0; i < MainMenu.arrayWithPrice.length; i++) {
+            total += MainMenu.arrayWithPrice[i];
         }
-        System.out.println("The total is:" + total);
+        System.out.println("The total income for date " + User.getChosenDate() + ":\n" + total);
         adminMenu();
     }
 }
